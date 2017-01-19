@@ -83,16 +83,18 @@ router.post('/', (req, res, next) => {
     if (donutArr.length > 0) {
       for (var i = 0; i < donutArr.length; i++) {
         var donutName = donutArr[i];
-        console.log(donutName);
+
+        //send response on last iteration
+        if (i === (donutArr.length - 1)) {
+          res.send('You added a shop!');
+        }
+
         db.any('SELECT * FROM donuts WHERE name = $1', donutName)
         .then((result) => {
           var donutID = result[0].id;
           console.log(donutID);
           db.any("INSERT INTO shops_donuts (shop_id, donut_id) VALUES($1, $2) returning id", [shopID, donutID])
           .then((result) => {
-            if (i === donutArr.length - 1) {
-              res.send('You added a shop!');
-            }
           })
           .catch((error) => {
             next(error);
