@@ -4,7 +4,7 @@ const db = require('../db/connection');
 
 router.get('/', (req, res, next) => {
   const renderObject = {};
-  renderObject.title = 'Shops';
+  renderObject.title = 'Donut Shop Manager';
   db.any('SELECT * FROM shops')
   .then((results) => {
     renderObject.shops = results;
