@@ -43,21 +43,20 @@ $(document).on('submit', '#modal-newshop-form', function(event) {
   var checkedEmployees = [];
   var checkedDonuts = [];
 
+//get all checked emploees from list
   var employeesList = document.getElementById("employees-list").getElementsByTagName("li");
   for (var i = 0; i < employeesList.length; i++) {
     if (employeesList[i].classList.contains("active")) {
       checkedEmployees.push(employeesList[i].innerText);
     }
   }
-  console.log(checkedEmployees);
-
+//get all checked donuts from list
   var donutsList = document.getElementById("donuts-list").getElementsByTagName("li");
   for (var i = 0; i < donutsList.length; i++) {
     if (donutsList[i].classList.contains("active")) {
       checkedDonuts.push(donutsList[i].innerText);
     }
   }
-
 
   const payload = {
     name: $name,
@@ -129,7 +128,6 @@ $(function () {
         $checkbox.on('change', function () {
             updateDisplay();
         });
-
 
 // Actions
         function updateDisplay() {
