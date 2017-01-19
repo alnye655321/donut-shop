@@ -40,12 +40,13 @@ router.get('/show/:id', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-  const newEmployee = {
+  const newShop = {
     name: req.body.name,
     city: req.body.city
   };
-  db.any(`INSERT INTO shops (name, city) VALUES('${newEmployee.name}', '${newEmployee.city}')`)
+  db.any(`INSERT INTO shops (name, city) VALUES('${newShop.name}', '${newShop.city}') returning id`)
   .then((result) => {
+    console.log(result[0].id);
     res.send('You added a shop!');
   })
   .catch((error) => {

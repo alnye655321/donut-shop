@@ -5,12 +5,11 @@
 {% block content %}
 
   <div class="container">
-<a data-toggle="modal" data-target="#myModal1">New Shop</a>
     <h1 style="display:inline-block">Shops</h1>
     <a href="#" class="btn btn-success btn-md" style="display:inline-block" data-toggle="modal" data-target="#myModal1">
       <span class="glyphicon glyphicon-plus"></span>Add Shop
     </a>
-    
+
 <br><br><br>
 
     {% for shop in shops %}
@@ -29,7 +28,7 @@
           sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
         <br>
-        <a class="btn btn-sm btn-danger show-shop-btn" href="/show/{{shop.id}}">Show</a>
+        <a class="btn btn-sm btn-success show-shop-btn" href="/show/{{shop.id}}">Show</a>
         <button class="btn btn-sm btn-danger delete-shop-btn" data-id="{{shop.id}}">Delete</button>
         <button type="button" class="btn btn-primary btn-sm update-shop-btn" data-toggle="modal" data-target="#myModal" data-id="{{shop.id}}" data-city="{{shop.city}}" data-name="{{shop.name}}">Update</button>
       </div>
@@ -75,9 +74,23 @@
               <label for="new-shop-city">City</label>
               <input type="text" class="form-control" name="genre" id="new-shop-city">
             </div>
+            <div class="form-group">
+              <ul class="list-group checked-list-box">
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item" data-checked="true">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+              <li class="list-group-item">Porta ac consectetur ac</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+              <li class="list-group-item">Cras justo odio</li>
+              <li class="list-group-item">Dapibus ac facilisis in</li>
+              <li class="list-group-item">Morbi leo risus</li>
+              <li class="list-group-item">Porta ac consectetur ac</li>
+              <li class="list-group-item">Vestibulum at eros</li>
+            </ul>
+          </div>
             <input type="hidden" name="id" id="new-shop-id">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
       </div>
