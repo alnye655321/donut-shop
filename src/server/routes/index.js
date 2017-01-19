@@ -35,7 +35,7 @@ router.get('/show/:id', (req, res, next) => {
   renderObject.title = 'Show Shop';
   db.tx(function (t) {
           return t.batch([
-              t.any('SELECT * FROM donuts JOIN shops_donuts on donuts.ID = shops_donuts.shop_id WHERE shop_id = $1', showID),
+              t.any('SELECT * from donuts JOIN shops_donuts on donuts.ID = shops_donuts.donut_id where shop_id = $1', showID),
               t.any('SELECT * FROM employees WHERE shop_id = $1', showID),
               t.one('SELECT * FROM shops WHERE id = $1', showID)
           ]);
