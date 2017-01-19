@@ -1,0 +1,112 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+
+    <h1>Shop Overview</h1>
+
+    <div class="row">
+      <div class="col-sm-4"><a href="#" class=""><img src="http://placehold.it/300x300" class="img-responsive"></a>
+      </div>
+      <div class="col-sm-8">
+        <h3 class="title">{{shops.name}}</h3>
+        <p><span class="glyphicon glyphicon-pencil"></span> City</p>
+        <p>{{shops.city}}</p>
+        <br>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Employees
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body">
+                <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for employee in employees %}
+                  <tr>
+                    <td>{{employee.first_name}}</td>
+                    <td>{{employee.last_name}}</td>
+                    <td>{{employee.email}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Donuts
+                </a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="panel-body">
+                <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Topping</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for donut in donuts %}
+                  <tr>
+                    <td>{{donut.name}}</td>
+                    <td>{{donut.topping}}</td>
+                    <td>$ {{donut.price}}.00</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingThree">
+              <h4 class="panel-title">
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Description
+                </a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="panel-body">
+                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                  in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                  sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
+            </div>
+          </div>
+      </div>
+
+        <!-- <button class="btn btn-sm btn-danger show-shop-btn" data-id="{{shop.id}}" data-city="{{shop.city}}" data-name="{{shop.name}}" data-toggle="modal" data-target="#myModal1">Show</button>
+        <button class="btn btn-sm btn-danger delete-shop-btn" data-id="{{shop.id}}">Delete</button>
+        <button type="button" class="btn btn-primary btn-sm update-shop-btn" data-toggle="modal" data-target="#myModal" data-id="{{shop.id}}" data-city="{{shop.city}}" data-name="{{shop.name}}">Update</button> -->
+      </div>
+    </div>
+    <!-- <hr> -->
+
+
+  </div>
+
+{% endblock %}

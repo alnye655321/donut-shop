@@ -1,0 +1,73 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+
+    <h1>Donuts Overview</h1>
+
+    <div class="row">
+
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Topping</th>
+          <th>Price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" id="newDonutName"></td>
+          <td><input type="text" id="newDonutTopping"></td>
+          <td><input type="text" id="newDonutPrice"></td>
+          <td><button type="button" class="btn btn-success btn-sm donut-add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add</button>
+        </tr>
+        {% for donut in donuts %}
+        <tr>
+          <td>{{donut.name}}</td>
+          <td>{{donut.topping}}</td>
+          <td>$ {{donut.price}}.00</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-sm donut-edit" data-toggle="modal" data-target="#myModal" data-id="{{donut.id}}" data-name="{{donut.name}}" data-topping="{{donut.topping}}" data-price="{{donut.price}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button>
+            <button type="button" class="btn btn-warning btn-sm donut-delete" data-id="{{donut.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    </div>
+    <!-- <hr> -->
+
+
+  </div>
+
+  <!-- Modal-Edit -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form id="modal-donut-form">
+            <div class="form-group">
+              <input type="text" class="form-control" name="name" id="update-donut-name">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="topping" id="update-donut-topping">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="price" id="update-donut-price">
+            </div>
+            <input type="hidden" name="id" id="update-donut-id">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

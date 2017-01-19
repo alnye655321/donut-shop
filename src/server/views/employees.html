@@ -1,0 +1,73 @@
+{% extends "_base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+  <div class="container">
+
+    <h1>Employees Overview</h1>
+
+    <div class="row">
+
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" id="newEmployeeFirstName"></td>
+          <td><input type="text" id="newEmployeeLastName"></td>
+          <td><input type="text" id="newEmployeeEmail"></td>
+          <td><button type="button" class="btn btn-success btn-sm employee-add"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add</button>
+        </tr>
+        {% for employee in employees %}
+        <tr>
+          <td>{{employee.first_name}}</td>
+          <td>{{employee.last_name}}</td>
+          <td>{{employee.email}}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-sm employee-edit" data-toggle="modal" data-target="#myModal" data-id="{{employee.id}}" data-first_name="{{employee.first_name}}" data-last_name="{{employee.last_name}}" data-email="{{employee.email}}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit</button>
+            <button type="button" class="btn btn-warning btn-sm employee-delete" data-id="{{employee.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    </div>
+    <!-- <hr> -->
+
+
+  </div>
+
+  <!-- Modal-Edit -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form id="modal-employee-form">
+            <div class="form-group">
+              <input type="text" class="form-control" name="name" id="update-employee-first_name">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="topping" id="update-employee-last_name">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="price" id="update-employee-email">
+            </div>
+            <input type="hidden" name="id" id="update-employee-id">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
