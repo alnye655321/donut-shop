@@ -64,7 +64,6 @@ router.post('/', (req, res, next) => {
   db.any(`INSERT INTO shops (name, city) VALUES('${newShop.name}', '${newShop.city}') returning id`)
   .then((result) => {
     var shopID = result[0].id;
-    //res.send('You added a shop!');
 
     //update employees with shop ids
     if (employeeArr.length > 0) {
@@ -91,6 +90,9 @@ router.post('/', (req, res, next) => {
           console.log(donutID);
           db.any("INSERT INTO shops_donuts (shop_id, donut_id) VALUES($1, $2) returning id", [shopID, donutID])
           .then((result) => {
+            if (i === donutArr.length - 1) {
+              res.send('You added a shop!');
+            }
           })
           .catch((error) => {
             next(error);
