@@ -1,9 +1,3 @@
-(function () {
-
-  console.log('sanity check!');
-
-})();
-
 //add new employee
 $(document).on('click', '.employee-add', function() {
   const $newEmployeeFirstName = $('#newEmployeeFirstName').val();

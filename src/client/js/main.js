@@ -39,9 +39,31 @@ $(document).on('submit', '#modal-newshop-form', function(event) {
   event.preventDefault();
   const $name = $('#new-shop-name').val();
   const $city = $('#new-shop-city').val();
+
+  var checkedEmployees = [];
+  var checkedDonuts = [];
+
+  var employeesList = document.getElementById("employees-list").getElementsByTagName("li");
+  for (var i = 0; i < employeesList.length; i++) {
+    if (employeesList[i].classList.contains("active")) {
+      checkedEmployees.push(employeesList[i].innerText);
+    }
+  }
+  console.log(checkedEmployees);
+
+  var donutsList = document.getElementById("donuts-list").getElementsByTagName("li");
+  for (var i = 0; i < donutsList.length; i++) {
+    if (donutsList[i].classList.contains("active")) {
+      checkedDonuts.push(donutsList[i].innerText);
+    }
+  }
+
+
   const payload = {
     name: $name,
-    city: $city
+    city: $city,
+    employees: JSON.stringify(checkedEmployees),
+    donuts: JSON.stringify(checkedDonuts)
   };
   $.ajax({
     type: 'POST',
@@ -77,7 +99,7 @@ $(document).on('click', '.delete-shop-btn', function() {
 });
 
 
-//list group form select
+//list group form select employees
 $(function () {
     $('.list-group.checked-list-box .list-group-item').each(function () {
 
@@ -144,15 +166,5 @@ $(function () {
             }
         }
         init();
-    });
-
-    $('#get-checked-data').on('click', function(event) {
-        event.preventDefault();
-        var checkedItems = {}, counter = 0;
-        $("#check-list-box li.active").each(function(idx, li) {
-            checkedItems[counter] = $(li).text();
-            counter++;
-        });
-        $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
     });
 });

@@ -8,7 +8,21 @@ router.get('/', (req, res, next) => {
   db.any('SELECT * FROM shops')
   .then((results) => {
     renderObject.shops = results;
-    res.render('index.html', renderObject);
+    db.any('SELECT * FROM employees')
+    .then((results) => {
+      renderObject.employees = results;
+      db.any('SELECT * FROM donuts')
+      .then((results) => {
+        renderObject.donuts = results;
+        res.render('index.html', renderObject);
+      })
+      .catch((error) => {
+        next(error);
+      });
+    })
+    .catch((error) => {
+      next(error);
+    });
   })
   .catch((error) => {
     next(error);
@@ -44,10 +58,53 @@ router.post('/', (req, res, next) => {
     name: req.body.name,
     city: req.body.city
   };
+  var employeeArr = JSON.parse(req.body.employees.toString());
+  var donutArr = JSON.parse(req.body.donuts.toString());
+
   db.any(`INSERT INTO shops (name, city) VALUES('${newShop.name}', '${newShop.city}') returning id`)
   .then((result) => {
-    console.log(result[0].id);
-    res.send('You added a shop!');
+    var shopID = result[0].id;
+    //res.send('You added a shop!');
+
+    //update employees with shop ids
+    if (employeeArr.length > 0) {
+      for (var i = 0; i < employeeArr.length; i++) {
+        var employeeLastName = employeeArr[i];
+        console.log(employeeLastName);
+        db.none("update employees set shop_id=$1 where last_name=$2", [shopID, employeeLastName])
+        .then((result) => {
+        })
+        .catch((error) => {
+          next(error);
+        });
+      }
+    }
+
+    //update donuts join with shop ids
+    if (donutArr.length > 0) {
+      for (var i = 0; i < donutArr.length; i++) {
+        var donutName = donutArr[i];
+        console.log(donutName);
+        db.any('SELECT * FROM donuts WHERE name = $1', donutName)
+        .then((result) => {
+          var donutID = result[0].id;
+          console.log(donutID);
+          db.any("INSERT INTO shops_donuts (shop_id, donut_id) VALUES($1, $2) returning id", [shopID, donutID])
+          .then((result) => {
+          })
+          .catch((error) => {
+            next(error);
+          });
+        })
+        .catch((error) => {
+          next(error);
+        });
+
+
+      }
+    }
+
+
   })
   .catch((error) => {
     next(error);

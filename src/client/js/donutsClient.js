@@ -1,9 +1,3 @@
-(function () {
-
-  console.log('sanity check!');
-
-})();
-
 //add new donut
 $(document).on('click', '.donut-add', function() {
   const $newDonutName = $('#newDonutName').val();
